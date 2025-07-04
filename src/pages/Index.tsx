@@ -1,10 +1,9 @@
-
 import React, { useState } from "react";
 import Header from "@/components/Header";
 import SearchForm from "@/components/SearchForm";
 import SearchResults from "@/components/SearchResults";
 import { Card, CardContent } from "@/components/ui/card";
-import { MapPin, Clock, Shield, CreditCard } from "lucide-react";
+import { MapPin, Clock, Shield, CreditCard, Gift, Percent, Tag } from "lucide-react";
 
 const Index = () => {
   const [showResults, setShowResults] = useState(false);
@@ -106,6 +105,62 @@ const Index = () => {
                 <p className="text-gray-600 text-sm">
                   Comparez et trouvez les tarifs les plus avantageux
                 </p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Promotional Offers */}
+      <section className="py-16 bg-gradient-to-r from-blue-50 to-cyan-50">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">
+            Offres pour vous
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <Card className="hover:shadow-xl transition-shadow duration-300 border-2 border-orange-200 bg-gradient-to-br from-orange-50 to-red-50">
+              <CardContent className="p-6 text-center">
+                <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Percent className="h-8 w-8 text-orange-600" />
+                </div>
+                <h3 className="font-bold text-xl mb-2 text-orange-800">Réduction 20%</h3>
+                <p className="text-orange-700 mb-4">
+                  Profitez de 20% de réduction sur tous les trajets Abidjan-Bouaké
+                </p>
+                <div className="bg-orange-100 text-orange-800 px-4 py-2 rounded-full text-sm font-semibold">
+                  Code: ABIDJAN20
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="hover:shadow-xl transition-shadow duration-300 border-2 border-green-200 bg-gradient-to-br from-green-50 to-emerald-50">
+              <CardContent className="p-6 text-center">
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Gift className="h-8 w-8 text-green-600" />
+                </div>
+                <h3 className="font-bold text-xl mb-2 text-green-800">Voyage gratuit</h3>
+                <p className="text-green-700 mb-4">
+                  Réservez 5 trajets et obtenez le 6ème gratuitement
+                </p>
+                <div className="bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-semibold">
+                  Programme fidélité
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="hover:shadow-xl transition-shadow duration-300 border-2 border-purple-200 bg-gradient-to-br from-purple-50 to-pink-50">
+              <CardContent className="p-6 text-center">
+                <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Tag className="h-8 w-8 text-purple-600" />
+                </div>
+                <h3 className="font-bold text-xl mb-2 text-purple-800">Première réservation</h3>
+                <p className="text-purple-700 mb-4">
+                  15% de réduction sur votre première réservation
+                </p>
+                <div className="bg-purple-100 text-purple-800 px-4 py-2 rounded-full text-sm font-semibold">
+                  Code: BIENVENUE15
+                </div>
               </CardContent>
             </Card>
           </div>
