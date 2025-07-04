@@ -57,7 +57,7 @@ const Index = () => {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">
-            Pourquoi choisir TransportBus ?
+            Pourquoi choisir Sekou Voyage ?
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -68,7 +68,7 @@ const Index = () => {
                 </div>
                 <h3 className="font-semibold text-lg mb-2">Large réseau</h3>
                 <p className="text-gray-600 text-sm">
-                  Plus de 1000 destinations dans toute la France
+                  Plus de 100 destinations dans toute la Côte d'Ivoire
                 </p>
               </CardContent>
             </Card>
@@ -121,12 +121,12 @@ const Index = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { from: "Paris", to: "Lyon", price: "25€", duration: "4h30" },
-              { from: "Marseille", to: "Nice", price: "18€", duration: "2h45" },
-              { from: "Toulouse", to: "Bordeaux", price: "22€", duration: "3h15" },
-              { from: "Lille", to: "Paris", price: "28€", duration: "3h00" },
-              { from: "Strasbourg", to: "Nancy", price: "15€", duration: "1h30" },
-              { from: "Nantes", to: "Rennes", price: "20€", duration: "2h00" }
+              { from: "Abidjan", to: "Bouaké", price: "15000 FCFA", duration: "3h30" },
+              { from: "Yamoussoukro", to: "Korhogo", price: "12000 FCFA", duration: "2h45" },
+              { from: "San-Pédro", to: "Abidjan", price: "18000 FCFA", duration: "4h15" },
+              { from: "Daloa", to: "Man", price: "8000 FCFA", duration: "2h00" },
+              { from: "Gagnoa", to: "Divo", price: "5000 FCFA", duration: "1h30" },
+              { from: "Abengourou", to: "Bondoukou", price: "10000 FCFA", duration: "2h30" }
             ].map((route, index) => (
               <Card key={index} className="hover:shadow-lg transition-shadow cursor-pointer">
                 <CardContent className="p-4">
@@ -149,7 +149,7 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
-              <h3 className="font-bold text-lg mb-4">TransportBus</h3>
+              <h3 className="font-bold text-lg mb-4">Sekou Voyage</h3>
               <p className="text-gray-400 text-sm">
                 Votre partenaire de confiance pour tous vos déplacements en bus.
               </p>
@@ -181,7 +181,7 @@ const Index = () => {
           </div>
           <div className="border-t border-gray-800 mt-8 pt-8 text-center">
             <p className="text-gray-400 text-sm">
-              © 2024 TransportBus. Tous droits réservés.
+              © 2024 Sekou Voyage. Tous droits réservés.
             </p>
           </div>
         </div>

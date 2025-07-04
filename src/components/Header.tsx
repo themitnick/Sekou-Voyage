@@ -10,7 +10,7 @@ const Header = () => {
             <div className="p-2 bg-primary rounded-lg">
               <Bus className="h-6 w-6 text-white" />
             </div>
-            <h1 className="text-2xl font-bold text-primary">TransportBus</h1>
+            <h1 className="text-2xl font-bold text-primary">Sekou Voyage</h1>
           </div>
           <nav className="hidden md:flex space-x-6">
             <a href="#" className="text-gray-600 hover:text-primary transition-colors">Accueil</a>
