@@ -5,9 +5,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
-import { CalendarIcon, ArrowLeftRight, MapPin } from "lucide-react";
+import { CalendarIcon, ArrowLeftRight, MapPin, Bus } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface SearchFormProps {
@@ -20,6 +21,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch }) => {
   const [departureDate, setDepartureDate] = useState<Date>();
   const [returnDate, setReturnDate] = useState<Date>();
   const [isReturnTrip, setIsReturnTrip] = useState(false);
+  const [company, setCompany] = useState("");
 
   const handleSwapCities = () => {
     const temp = departure;
@@ -38,7 +40,8 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch }) => {
       arrival,
       departureDate,
       returnDate: isReturnTrip ? returnDate : null,
-      isReturnTrip
+      isReturnTrip,
+      company
     });
   };
 
@@ -69,7 +72,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch }) => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+      <div className="grid grid-cols-1 md:grid-cols-5 gap-4 items-end">
         <div className="md:col-span-2">
           <div className="flex items-center space-x-2">
             <div className="flex-1">
@@ -109,6 +112,26 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch }) => {
               />
             </div>
           </div>
+        </div>
+
+        <div>
+          <Label className="text-sm font-medium text-gray-700">
+            <Bus className="inline h-4 w-4 mr-1" />
+            Compagnie
+          </Label>
+          <Select value={company} onValueChange={setCompany}>
+            <SelectTrigger className="mt-1">
+              <SelectValue placeholder="Toutes" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="">Toutes les compagnies</SelectItem>
+              <SelectItem value="UTB">UTB</SelectItem>
+              <SelectItem value="AVS">AVS</SelectItem>
+              <SelectItem value="LUXURY">LUXURY</SelectItem>
+              <SelectItem value="MOMO TRANSPORT">MOMO TRANSPORT</SelectItem>
+              <SelectItem value="MKT">MKT</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
 
         <div>
