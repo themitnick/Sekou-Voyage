@@ -1,202 +1,158 @@
 
 import React, { useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Calendar } from "@/components/ui/calendar";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { format } from "date-fns";
-import { fr } from "date-fns/locale";
-import { CalendarIcon, ArrowLeftRight, MapPin, Bus } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { Calendar, MapPin, Users, Search } from "lucide-react";
 
 interface SearchFormProps {
-  onSearch: (searchData: any) => void;
+  onSearch: (data: any) => void;
 }
 
-const SearchForm: React.FC<SearchFormProps> = ({ onSearch }) => {
+const SearchForm = ({ onSearch }: SearchFormProps) => {
   const [departure, setDeparture] = useState("");
-  const [arrival, setArrival] = useState("");
-  const [departureDate, setDepartureDate] = useState<Date>();
-  const [returnDate, setReturnDate] = useState<Date>();
-  const [isReturnTrip, setIsReturnTrip] = useState(false);
+  const [destination, setDestination] = useState("");
+  const [date, setDate] = useState("");
+  const [passengers, setPassengers] = useState("1");
   const [company, setCompany] = useState("");
 
-  const handleSwapCities = () => {
-    const temp = departure;
-    setDeparture(arrival);
-    setArrival(temp);
-  };
-
-  const handleSearch = () => {
-    if (!departure || !arrival || !departureDate) {
-      alert("Veuillez remplir tous les champs obligatoires");
-      return;
-    }
-
-    onSearch({
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const searchData = {
       departure,
-      arrival,
-      departureDate,
-      returnDate: isReturnTrip ? returnDate : null,
-      isReturnTrip,
+      destination,
+      date,
+      passengers: parseInt(passengers),
       company
-    });
+    };
+    console.log("Données de recherche:", searchData);
+    onSearch(searchData);
   };
+
+  const cities = [
+    "Abidjan", "Bouaké", "Yamoussoukro", "San-Pédro", "Korhogo", 
+    "Man", "Daloa", "Gagnoa", "Divo", "Abengourou", "Bondoukou"
+  ];
+
+  const companies = [
+    { value: "utb", label: "UTB" },
+    { value: "avs", label: "AVS" },
+    { value: "luxury", label: "LUXURY" },
+    { value: "momo-transport", label: "MOMO TRANSPORT" },
+    { value: "mkt", label: "MKT" }
+  ];
 
   return (
-    <div className="bg-white rounded-xl shadow-lg p-6 max-w-4xl mx-auto">
-      <div className="flex items-center space-x-4 mb-6">
-        <div className="flex items-center space-x-2">
-          <input
-            type="radio"
-            id="oneWay"
-            name="tripType"
-            checked={!isReturnTrip}
-            onChange={() => setIsReturnTrip(false)}
-            className="text-primary"
-          />
-          <Label htmlFor="oneWay">Aller simple</Label>
-        </div>
-        <div className="flex items-center space-x-2">
-          <input
-            type="radio"
-            id="roundTrip"
-            name="tripType"
-            checked={isReturnTrip}
-            onChange={() => setIsReturnTrip(true)}
-            className="text-primary"
-          />
-          <Label htmlFor="roundTrip">Aller-retour</Label>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-4 items-end">
-        <div className="md:col-span-2">
-          <div className="flex items-center space-x-2">
-            <div className="flex-1">
+    <Card className="bg-white shadow-xl border-0">
+      <CardContent className="p-6">
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+            {/* Departure */}
+            <div className="space-y-2">
               <Label htmlFor="departure" className="text-sm font-medium text-gray-700">
                 <MapPin className="inline h-4 w-4 mr-1" />
                 Départ
               </Label>
-              <Input
-                id="departure"
-                value={departure}
-                onChange={(e) => setDeparture(e.target.value)}
-                placeholder="Ville de départ"
-                className="mt-1"
-              />
+              <Select value={departure} onValueChange={setDeparture}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Ville de départ" />
+                </SelectTrigger>
+                <SelectContent>
+                  {cities.map((city) => (
+                    <SelectItem key={city} value={city}>
+                      {city}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
-            
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={handleSwapCities}
-              className="mt-6 p-2 hover:bg-primary/10"
-            >
-              <ArrowLeftRight className="h-4 w-4 text-primary" />
-            </Button>
-            
-            <div className="flex-1">
-              <Label htmlFor="arrival" className="text-sm font-medium text-gray-700">
+
+            {/* Destination */}
+            <div className="space-y-2">
+              <Label htmlFor="destination" className="text-sm font-medium text-gray-700">
                 <MapPin className="inline h-4 w-4 mr-1" />
                 Arrivée
               </Label>
+              <Select value={destination} onValueChange={setDestination}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Ville d'arrivée" />
+                </SelectTrigger>
+                <SelectContent>
+                  {cities.map((city) => (
+                    <SelectItem key={city} value={city}>
+                      {city}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/* Company */}
+            <div className="space-y-2">
+              <Label htmlFor="company" className="text-sm font-medium text-gray-700">
+                Compagnie
+              </Label>
+              <Select value={company} onValueChange={setCompany}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Choisir compagnie" />
+                </SelectTrigger>
+                <SelectContent>
+                  {companies.map((comp) => (
+                    <SelectItem key={comp.value} value={comp.value}>
+                      {comp.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/* Date */}
+            <div className="space-y-2">
+              <Label htmlFor="date" className="text-sm font-medium text-gray-700">
+                <Calendar className="inline h-4 w-4 mr-1" />
+                Date
+              </Label>
               <Input
-                id="arrival"
-                value={arrival}
-                onChange={(e) => setArrival(e.target.value)}
-                placeholder="Ville d'arrivée"
-                className="mt-1"
+                id="date"
+                type="date"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+                className="w-full"
               />
             </div>
+
+            {/* Passengers */}
+            <div className="space-y-2">
+              <Label htmlFor="passengers" className="text-sm font-medium text-gray-700">
+                <Users className="inline h-4 w-4 mr-1" />
+                Passagers
+              </Label>
+              <Select value={passengers} onValueChange={setPassengers}>
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="1">1 passager</SelectItem>
+                  <SelectItem value="2">2 passagers</SelectItem>
+                  <SelectItem value="3">3 passagers</SelectItem>
+                  <SelectItem value="4">4 passagers</SelectItem>
+                  <SelectItem value="5">5+ passagers</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
           </div>
-        </div>
 
-        <div>
-          <Label className="text-sm font-medium text-gray-700">
-            <Bus className="inline h-4 w-4 mr-1" />
-            Compagnie
-          </Label>
-          <Select value={company} onValueChange={setCompany}>
-            <SelectTrigger className="mt-1">
-              <SelectValue placeholder="Toutes" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="">Toutes les compagnies</SelectItem>
-              <SelectItem value="UTB">UTB</SelectItem>
-              <SelectItem value="AVS">AVS</SelectItem>
-              <SelectItem value="LUXURY">LUXURY</SelectItem>
-              <SelectItem value="MOMO TRANSPORT">MOMO TRANSPORT</SelectItem>
-              <SelectItem value="MKT">MKT</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-
-        <div>
-          <Label className="text-sm font-medium text-gray-700">Date de départ</Label>
-          <Popover>
-            <PopoverTrigger asChild>
-              <Button
-                variant="outline"
-                className={cn(
-                  "w-full justify-start text-left font-normal mt-1",
-                  !departureDate && "text-muted-foreground"
-                )}
-              >
-                <CalendarIcon className="mr-2 h-4 w-4" />
-                {departureDate ? format(departureDate, "dd/MM/yyyy", { locale: fr }) : "Date"}
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent className="w-auto p-0" align="start">
-              <Calendar
-                mode="single"
-                selected={departureDate}
-                onSelect={setDepartureDate}
-                disabled={(date) => date < new Date()}
-                initialFocus
-                className="pointer-events-auto"
-              />
-            </PopoverContent>
-          </Popover>
-        </div>
-
-        {isReturnTrip && (
-          <div>
-            <Label className="text-sm font-medium text-gray-700">Date de retour</Label>
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  variant="outline"
-                  className={cn(
-                    "w-full justify-start text-left font-normal mt-1",
-                    !returnDate && "text-muted-foreground"
-                  )}
-                >
-                  <CalendarIcon className="mr-2 h-4 w-4" />
-                  {returnDate ? format(returnDate, "dd/MM/yyyy", { locale: fr }) : "Date"}
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0" align="start">
-                <Calendar
-                  mode="single"
-                  selected={returnDate}
-                  onSelect={setReturnDate}
-                  disabled={(date) => date < (departureDate || new Date())}
-                  initialFocus
-                  className="pointer-events-auto"
-                />
-              </PopoverContent>
-            </Popover>
+          <div className="flex justify-center pt-4">
+            <Button type="submit" size="lg" className="px-8">
+              <Search className="h-4 w-4 mr-2" />
+              Rechercher
+            </Button>
           </div>
-        )}
-
-        <Button onClick={handleSearch} className="h-10 gradient-bg text-white font-medium">
-          Rechercher
-        </Button>
-      </div>
-    </div>
+        </form>
+      </CardContent>
+    </Card>
   );
 };
 
