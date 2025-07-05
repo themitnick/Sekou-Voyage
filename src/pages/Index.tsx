@@ -4,6 +4,9 @@ import Header from "@/components/Header";
 import SearchForm from "@/components/SearchForm";
 import SearchResults from "@/components/SearchResults";
 import Slides from "@/components/Slides";
+import Testimonials from "@/components/Testimonials";
+import Partners from "@/components/Partners";
+import MobileApp from "@/components/MobileApp";
 import { Card, CardContent } from "@/components/ui/card";
 import { MapPin, Clock, Shield, CreditCard, Gift, Percent, Tag } from "lucide-react";
 
@@ -34,9 +37,6 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
-      
-      {/* Slides Section */}
-      <Slides />
 
       {/* Hero Section */}
       <section className="gradient-bg py-16">
@@ -56,6 +56,9 @@ const Index = () => {
           <SearchForm onSearch={handleSearch} />
         </div>
       </section>
+
+      {/* Slides Section - repositioned here */}
+      <Slides />
 
       {/* Features */}
       <section className="py-16">
@@ -115,6 +118,15 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Testimonials Section */}
+      <Testimonials />
+
+      {/* Partners Section */}
+      <Partners />
+
+      {/* Mobile App Section */}
+      <MobileApp />
 
       {/* Promotional Offers */}
       <section className="py-16 bg-gradient-to-r from-blue-50 to-cyan-50">
