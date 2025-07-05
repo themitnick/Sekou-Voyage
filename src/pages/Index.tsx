@@ -35,6 +35,9 @@ const Index = () => {
     <div className="min-h-screen bg-gray-50">
       <Header />
       
+      {/* Slides Section */}
+      <Slides />
+
       {/* Hero Section */}
       <section className="gradient-bg py-16">
         <div className="container mx-auto px-4 text-center">
@@ -53,9 +56,6 @@ const Index = () => {
           <SearchForm onSearch={handleSearch} />
         </div>
       </section>
-
-      {/* Slides Section */}
-      <Slides />
 
       {/* Features */}
       <section className="py-16">
