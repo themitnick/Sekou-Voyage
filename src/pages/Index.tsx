@@ -1,7 +1,9 @@
+
 import React, { useState } from "react";
 import Header from "@/components/Header";
 import SearchForm from "@/components/SearchForm";
 import SearchResults from "@/components/SearchResults";
+import Slides from "@/components/Slides";
 import { Card, CardContent } from "@/components/ui/card";
 import { MapPin, Clock, Shield, CreditCard, Gift, Percent, Tag } from "lucide-react";
 
@@ -51,6 +53,9 @@ const Index = () => {
           <SearchForm onSearch={handleSearch} />
         </div>
       </section>
+
+      {/* Slides Section */}
+      <Slides />
 
       {/* Features */}
       <section className="py-16">

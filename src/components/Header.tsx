@@ -1,5 +1,6 @@
 
-import { Bus } from "lucide-react";
+import { Bus, User } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const Header = () => {
   return (
@@ -12,10 +13,14 @@ const Header = () => {
             </div>
             <h1 className="text-2xl font-bold text-primary">Sekou Voyage</h1>
           </div>
-          <nav className="hidden md:flex space-x-6">
+          <nav className="hidden md:flex items-center space-x-6">
             <a href="#" className="text-gray-600 hover:text-primary transition-colors">Accueil</a>
             <a href="#" className="text-gray-600 hover:text-primary transition-colors">Mes Réservations</a>
             <a href="#" className="text-gray-600 hover:text-primary transition-colors">Aide</a>
+            <Button variant="outline" size="sm" className="ml-4">
+              <User className="h-4 w-4 mr-2" />
+              Connexion
+            </Button>
           </nav>
         </div>
       </div>
